@@ -49,6 +49,7 @@ main{flex:1;min-height:0;overflow-y:auto;padding:8px 12px}
 #sh h3{margin:0 0 6px;font-weight:400;font-size:18px}
 #sh p{margin:6px 0;font-size:14px;line-height:1.5}
 @keyframes up{from{transform:translateY(100%)}}
+#tj{display:none;gap:6px;align-items:center;padding:6px 12px 0;flex:none;font-size:12px;color:var(--mut)}#tj input{width:72px;font:inherit;font-size:14px;color:var(--fg);background:var(--card);border:1.5px solid var(--bd);border-radius:10px;padding:4px 8px}#tj button{font:inherit;font-size:13px;background:var(--pri);color:#fff;border:0;border-radius:10px;padding:5px 12px;cursor:pointer}
 footer{flex:none;text-align:center;font-size:10.5px;line-height:1.4;color:var(--mut);padding:5px 8px calc(5px + env(safe-area-inset-bottom,0px))}
 .cf{position:fixed;top:40%;font-size:22px;pointer-events:none;z-index:9;animation:fl 1.1s ease-out forwards}
 @keyframes fl{to{transform:translate(var(--x),-140px) rotate(200deg);opacity:0}}
@@ -57,6 +58,7 @@ footer{flex:none;text-align:center;font-size:10.5px;line-height:1.4;color:var(--
 <header><h1>📚 অর্থনীতি কুইজ: অর্থনৈতিক সমস্যা ও অর্থব্যবস্থা</h1>
 <div class="chips"><span class="chip" id="cq">প্রশ্ন ০/০</span><span class="chip" id="cs">⭐ ০</span><span class="chip" id="cst">🔥 ০</span><button class="chip" id="snd" aria-label="শব্দ চালু/বন্ধ">🔊</button></div>
 <p class="hint">প্রতিটি প্রশ্নের জন্য ৩০ সেকেন্ড সময়। একটি অপশনে ট্যাপ করো, সঙ্গে সঙ্গে উত্তর জানা যাবে।</p></header>
+<div id="tj"><span>🔑 শিক্ষক:</span><input id="jn" inputmode="numeric" placeholder="প্রশ্ন নং" aria-label="প্রশ্ন নম্বর"><button id="jb">যাও</button></div>
 <div id="strip"></div>
 <main id="m"></main>
 <div id="ov" role="dialog" aria-modal="true"><div id="sh"></div></div>
@@ -300,7 +302,7 @@ if(r<=0){timeout();return}
 raf=requestAnimationFrame(tick)}
 function lock(k){locked=true;cancelAnimationFrame(raf);var q=Q[i];
 Array.prototype.forEach.call(document.querySelectorAll(".opt"),function(b,j){b.disabled=true;if(j===q.a)b.classList.add("ok");else if(j===k)b.classList.add("no")})}
-function fin(ok){st[i]=ok?1:2;if(ok){score++;streak++}else streak=0;chips()}
+function fin(ok){if(st[i]){chips();return}st[i]=ok?1:2;if(ok){score++;streak++}else streak=0;chips()}
 function pick(k){if(locked)return;lock(k);var q=Q[i],ok=k===q.a;fin(ok);if(ok)conf();
 var last=i===N-1;
 $("sh").innerHTML='<h3>'+(ok?"✅ সঠিক উত্তর!":"❌ ভুল উত্তর")+'</h3><p><b>সঠিক উত্তর: '+L[q.a]+') '+q.o[q.a]+'</b></p><p>'+q.e+'</p><button class="btn" id="nx" style="width:100%">'+(last?"ফলাফল দেখুন":"পরের প্রশ্ন")+'</button>';
@@ -314,5 +316,12 @@ $("m").innerHTML='<div class="card center"><div class="big">'+(p>=.8?"🏆":"⭐
 $("cq").textContent="সমাপ্ত";$("rt").onclick=function(){start(false)}}
 function conf(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
 ["🎉","✨","🎊","⭐","🎉","✨"].forEach(function(e,k){var s=document.createElement("span");s.className="cf";s.textContent=e;s.style.left=(25+k*10)+"%";s.style.setProperty("--x",(k%2?1:-1)*(20+k*8)+"px");document.body.appendChild(s);setTimeout(function(){s.remove()},1200)})}
+var TC="palash2026";
+try{if(new URLSearchParams(location.search).get("teacher")===TC)$("tj").style.display="flex"}catch(e){}
+function jump(){var n=parseInt($("jn").value.replace(/[০-৯]/g,function(d){return"০১২৩৪৫৬৭৮৯".indexOf(d)}),10);
+if(!(n>=1&&n<=N)){$("jn").value="";$("jn").placeholder="১–"+bn(N);return}
+try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume()}catch(e){}
+cancelAnimationFrame(raf);$("ov").classList.remove("on");i=n-1;show();$("jn").value=""}
+$("jb").onclick=jump;$("jn").onkeydown=function(e){if(e.key==="Enter")jump()};
 intro();
 </script></body></html>
