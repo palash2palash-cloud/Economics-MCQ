@@ -288,7 +288,7 @@ $("btnJump").onclick = () => {
 };
 $("jumpNo").onkeydown = e => { if (e.key === "Enter") $("btnJump").click(); };
 $("btnPrev").onclick = () => { if (idx > 0) go(idx - 1); };
-$("mOk").onclick = () => $("modal").classList.add("hidden");
+$("mOk").onclick = () => $("btnNext").click();
 $("modal").onclick = e => { if (e.target.id === "modal") $("modal").classList.add("hidden"); };
 
 function score() {
