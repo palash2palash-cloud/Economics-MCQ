@@ -85,7 +85,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);padding:20px 16px 28p
 </head>
 <body>
 <header>
-  <a class="back" href="index.html">← অধ্যায় তালিকা</a>
+  <a class="back" id="backLink" href="index.html">← অধ্যায় তালিকা</a>
   <h1>অর্থনীতি ১ম পত্র । ১ম অধ্যায় । মৌলিক অর্থনৈতিক সমস্যা এবং এর সমাধান</h1>
   <p>বহুনির্বাচনি কুইজ (MCQ)</p>
 </header>
@@ -114,7 +114,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);padding:20px 16px 28p
       <span class="timer" id="timer">০০:৩০</span>
     </div>
     <div class="prog"><i id="progBar"></i></div>
-    <div class="jump">
+    <div class="jump hidden" id="jumpBox">
       <span>প্রশ্নে যাও:</span>
       <input type="number" id="jumpNo" min="1" inputmode="numeric" placeholder="নম্বর">
       <button class="btn small" id="btnJump">যাও</button>
@@ -173,6 +173,9 @@ const MAP = ``;
 const L = ["ক","খ","গ","ঘ"], ROM = ["i.","ii.","iii."];
 const bn = n => String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 const $ = id => document.getElementById(id);
+// জাম্প অপশন শুধু শিক্ষকের লিংকে (?teacher=palash2026)
+const TEACHER = new URLSearchParams(location.search).get("teacher") === "palash2026";
+if (TEACHER) { $("jumpBox").classList.remove("hidden"); $("backLink").href = "index.html?teacher=palash2026"; }
 let list = [], idx = 0, perQ = 30, left = 0, tick = null, t0 = 0;
 let res = [];   // per question: {q, pick: -1 none, ok}
 
