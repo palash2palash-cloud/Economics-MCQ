@@ -19,8 +19,9 @@ body{font-family:Kalpurush,"TNRw","Times New Roman",Times,serif;background:var(-
 .hero p{margin:8px auto 0;max-width:460px;font-size:15px;opacity:.92;line-height:1.5}
 .stats{position:relative;z-index:2;display:flex;width:100%;justify-content:center;gap:12px;margin:-38px auto 0;padding:0 14px;max-width:620px}
 .stat{flex:1;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 8px;text-align:center;box-shadow:0 6px 18px rgba(110,18,18,.10)}
-.stat b{display:block;font-size:26px;font-weight:400;color:var(--pri);line-height:1.2}
-.stat span{font-size:13px;color:var(--mut)}
+.stat{display:flex;align-items:baseline;justify-content:center;gap:5px;white-space:nowrap}
+.stat b{display:inline;font-size:24px;font-weight:400;color:var(--pri);line-height:1.2}
+.stat span{font-size:15px;color:var(--mut)}
 main{flex:1;width:100%;max-width:620px;margin:0 auto;padding:18px 14px 10px}
 .paper{background:var(--card);border:1px solid var(--bd);border-radius:18px;margin-bottom:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.05)}
 .ph{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#fbf3e6,#fff);border-bottom:1px dashed #d9c9b0}
@@ -44,7 +45,7 @@ a.ch:hover .go{background:var(--pri2)}
 .soon{font-size:13px;color:var(--mut);text-align:center;padding:4px 0 2px}
 footer{text-align:center;font-size:12px;line-height:1.5;color:var(--mut);padding:10px 12px calc(14px + env(safe-area-inset-bottom,0px))}
 footer b{font-weight:400;color:var(--pri)}
-@media(max-width:480px){.hero h1{font-size:26px}.hero{padding:28px 14px 58px}.stat b{font-size:22px}.stats{gap:8px}}
+@media(max-width:480px){.hero h1{font-size:26px}.hero{padding:28px 14px 58px}.stat b{font-size:18px}.stat span{font-size:13px}.stat{padding:12px 4px;gap:3px}.stats{gap:8px}}
 @media(prefers-reduced-motion:reduce){a.ch{transition:none}a.ch:hover{transform:none}}
 </style></head><body>
 <header class="hero">
@@ -63,7 +64,8 @@ footer b{font-weight:400;color:var(--pri)}
 /* নতুন অধ্যায় যোগ করতে ঠিক পত্রের তালিকায় একটি লাইন বাড়ান: [নম্বর, নাম, প্রশ্নসংখ্যা, ফাইল, অংশ সংখ্যা] */
 var PAPERS=[
 ["১","অর্থনীতি ১ম পত্র",[
-[1,"মৌলিক অর্থনৈতিক সমস্যা এবং এর সমাধান",143,"chapter1.html",4]
+[1,"মৌলিক অর্থনৈতিক সমস্যা এবং এর সমাধান",142,"chapter1.html",4],
+[2,"ভোক্তা ও উৎপাদকের আচরণ",239,"chapter2.html",6]
 ]],
 ["২","অর্থনীতি ২য় পত্র",[
 [1,"বাংলাদেশের অর্থনীতির পরিচয়",134,"paper2-chapter1.html",4]
@@ -78,8 +80,8 @@ document.getElementById("list").innerHTML=PAPERS.map(function(p){
  return'<section class="paper"><div class="ph"><span class="pn">'+p[0]+'</span><div><h2>'+p[1]+'</h2><small>'+bn(p[2].length)+'টি অধ্যায় · '+bn(q)+'টি প্রশ্ন</small></div></div><div class="chs">'+
  p[2].map(function(c){return'<a class="ch" href="'+c[3]+TQ+'"><span class="n">'+bn(c[0])+'</span><span class="t"><span class="nm"><em>'+(ORD[c[0]]||bn(c[0]))+' অধ্যায়</em>'+c[1]+'</span><span class="chips"><span class="chip">'+bn(c[2])+'টি প্রশ্ন</span><span class="chip g">'+bn(c[4])+'টি অংশ</span><span class="chip g">⏱ টাইমারসহ</span></span></span><span class="go" aria-hidden="true">›</span></a>'}).join("")+
  '<div class="soon">পরের অধ্যায়গুলো শীঘ্রই যোগ হবে</div></div></section>'}).join("");
-document.getElementById("sP").textContent=bn(PAPERS.length);
-document.getElementById("sC").textContent=bn(nc);
-document.getElementById("sQ").textContent=bn(nq);
+document.getElementById("sP").textContent=bn(PAPERS.length)+"টি";
+document.getElementById("sC").textContent=bn(nc)+"টি";
+document.getElementById("sQ").textContent=bn(nq)+"টি";
 </script>
 </body></html>
